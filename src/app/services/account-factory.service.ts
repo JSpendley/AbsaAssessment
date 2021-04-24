@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { AccountTypes } from '../enums/account-types.enum';
 import { BankAccountDTO } from '../interfaces/bank-account-dto.interface';
 import { BankAccount } from '../models/bank-account.model';
-import { CurrentAccount } from '../models/current-accout.model';
+import { CurrentAccount } from '../models/current-account.model';
 import { SavingsAccount } from '../models/savings-account.model';
 
 @Injectable({
@@ -20,12 +20,12 @@ export class AccountFactoryService {
       case AccountTypes.SAVINGS:
         return new SavingsAccount({
           accountNumber: account.account_number,
-          balance: parseInt(account.balance),
+          balance: parseFloat(account.balance),
         });
       case AccountTypes.CHEQUE:
         return new CurrentAccount({
           accountNumber: account.account_number,
-          balance: parseInt(account.balance),
+          balance: parseFloat(account.balance),
         });
       default:
         return null;

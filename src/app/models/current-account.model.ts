@@ -4,16 +4,29 @@ import { BankAccount } from './bank-account.model';
 import { WithdrawalError } from './errors.model';
 
 export class CurrentAccount extends BankAccount implements IBankAccount {
+  private overdraftLimit = -500;
 
-  constructor({ balance, accountNumber }: { balance: number, accountNumber:string }) {
+  constructor({
+    balance,
+    accountNumber,
+  }: {
+    balance: number;
+    accountNumber: string;
+  }) {
     super({ balance, accountNumber, accountType: AccountTypes.CHEQUE });
   }
 
-  getBalance(): number {
-    return 0;
+  canWithdraw(): boolean {
+    return this.balance > this.overdraftLimit;
   }
 
   withdraw(): boolean | WithdrawalError {
-    return true;
+    if (this.canWithdraw()) {
+      return true;
+    }
+
+    return new WithdrawalError(
+      'You do not have any available funds to withdraw'
+    );
   }
 }

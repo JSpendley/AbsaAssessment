@@ -1,7 +1,6 @@
-import { WithdrawalError } from "../models/errors.model";
+import { WithdrawalError } from '../models/errors.model';
 
-export interface IBankAccount{
-    withdraw: () => boolean | WithdrawalError;
-    getBalance: () => number;
+export interface IBankAccount {
+  withdraw: () => boolean | WithdrawalError;
+  canWithdraw: () => boolean;
 }
-

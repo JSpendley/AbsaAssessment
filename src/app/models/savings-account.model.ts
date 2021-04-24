@@ -6,21 +6,25 @@ import { WithdrawalError } from './errors.model';
 export class SavingsAccount extends BankAccount implements IBankAccount {
   private minimumBalance = 0;
 
-  constructor({ balance, accountNumber }: { balance: number, accountNumber:string }) {
-    super({balance, accountNumber, accountType: AccountTypes.SAVINGS});
+  constructor({
+    balance,
+    accountNumber,
+  }: {
+    balance: number;
+    accountNumber: string;
+  }) {
+    super({ balance, accountNumber, accountType: AccountTypes.SAVINGS });
   }
 
-  getBalance(): number{
-    return 0;
-  };
+  canWithdraw(): boolean {
+    return this.balance > this.minimumBalance;
+  }
 
   withdraw(): boolean | WithdrawalError {
-    if (this.balance <= this.minimumBalance) {
-      return new WithdrawalError('Account balance must be more than 0');
+    if (this.canWithdraw()) {
+      return true;
     }
 
-    return true;
+    return new WithdrawalError('Account balance must be more than 0');
   }
-
-
 }
