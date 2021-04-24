@@ -1,5 +1,7 @@
 # AcmeBank
 
+Run `npm install` to install all the required dependencies.
+
 Run `ng serve -o` for a dev server. This will open the app automatically in your default browser. The app will automatically reload if you change any of the source files.
 
 Please make sure you have the mock API checked out and running in its default configuration for this application to load accounts. [https://github.com/cibfrontend/mock-api-server](https://github.com/cibfrontend/mock-api-server)
